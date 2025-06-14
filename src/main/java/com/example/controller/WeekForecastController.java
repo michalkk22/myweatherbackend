@@ -1,4 +1,4 @@
-package com.example.resource;
+package com.example.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/week")
-public class WeekForecastResource {
+public class WeekForecastController {
     private final WeekForecastService weekForecastService;
 
-    public WeekForecastResource(WeekForecastService weekForecastService) {
+    public WeekForecastController(WeekForecastService weekForecastService) {
         this.weekForecastService = weekForecastService;
     }
 
