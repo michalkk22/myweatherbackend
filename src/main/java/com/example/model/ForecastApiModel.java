@@ -15,13 +15,15 @@ public class ForecastApiModel {
         private final List<Double> temperature_2m_max; // Celsuis by default
         private final List<Double> temperature_2m_min;
         private final List<Integer> weathercode;
+        private final List<Double> sunshine_duration; // in seconds
         
         public Daily(List<String> time, List<Double> temperature_2m_max, List<Double> temperature_2m_min,
-                List<Integer> weathercode) {
+                List<Integer> weathercode, List<Double> sunshine_duration) {
             this.time = time;
             this.temperature_2m_max = temperature_2m_max;
             this.temperature_2m_min = temperature_2m_min;
             this.weathercode = weathercode;
+            this.sunshine_duration = sunshine_duration;
         }
 
         public List<String> getTime() {
@@ -38,6 +40,10 @@ public class ForecastApiModel {
 
         public List<Integer> getWeathercode() {
             return weathercode;
+        }
+
+        public List<Double> getSunshine_duration() {
+            return sunshine_duration;
         }
     }
     

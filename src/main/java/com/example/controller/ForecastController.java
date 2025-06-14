@@ -2,36 +2,32 @@ package com.example.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.service.WeekForecastService;
+import com.example.service.ForecastService;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
-
 @RestController
-@RequestMapping("/week")
-public class WeekForecastController {
-    private final WeekForecastService weekForecastService;
+public class ForecastController {
+    private final ForecastService weekForecastService;
 
-    public WeekForecastController(WeekForecastService weekForecastService) {
+    public ForecastController(ForecastService weekForecastService) {
         this.weekForecastService = weekForecastService;
     }
 
     @GetMapping("/")
-    public String getForecast(
+    public String getWeekForecast(
         @RequestParam double latitude,
         @RequestParam double longitude
     ) {
-        return weekForecastService.getForecast(latitude, longitude);
+        return weekForecastService.getWeekForecast(latitude, longitude);
     }
 
     @GetMapping("/summary")
-    public String getSummary(
+    public String getWeekSummary(
         @RequestParam double latitude,
         @RequestParam double longitude
     ) {
-        return weekForecastService.getSummary(latitude, longitude);
+        return weekForecastService.getWeekSummary(latitude, longitude);
     }
 }
