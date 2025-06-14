@@ -1,13 +1,13 @@
-package com.example.weekweather;
+package com.example.myweather;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WeekweatherApplication {
+public class MyweatherApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WeekweatherApplication.class, args);
+		SpringApplication.run(MyweatherApplication.class, args);
 	}
 
 }
