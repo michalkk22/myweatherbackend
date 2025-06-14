@@ -19,7 +19,6 @@ public class ForecastClient {
     public ForecastApiModel getWeekForecast(double latitude, double longitude) {
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder
-                        .path("/v1/forecast")
                         .queryParam("latitude", latitude)
                         .queryParam("longitude", longitude)
                         .queryParam("daily", "temperature_2m_max", "temperature_2m_min", "weathercode",
