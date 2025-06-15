@@ -22,7 +22,7 @@ public class ForecastClient {
                         .queryParam("latitude", latitude)
                         .queryParam("longitude", longitude)
                         .queryParam("daily", "temperature_2m_max", "temperature_2m_min", "weathercode",
-                                "sunshine_duration")
+                                "sunshine_duration", "surface_pressure_mean")
                         .queryParam("timezone", "auto")
                         .build())
                 .retrieve()

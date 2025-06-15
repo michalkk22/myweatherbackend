@@ -3,6 +3,7 @@ package com.example.controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.dto.DailyForecastResponse;
+import com.example.dto.WeekSummaryResponse;
 import com.example.service.ForecastService;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public class ForecastController {
     }
 
     @GetMapping("/summary")
-    public String getWeekSummary(
+    public WeekSummaryResponse getWeekSummary(
         @RequestParam double latitude,
         @RequestParam double longitude
     ) {
