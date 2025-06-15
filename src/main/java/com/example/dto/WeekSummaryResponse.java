@@ -5,10 +5,10 @@ public class WeekSummaryResponse {
     final double sunshine;
     final double temperatureMax;
     final double temperatureMin;
-    final String weather;
+    final String[] weather;
     
     public WeekSummaryResponse(double pressure, double sunshine, double temperatureMax, double temperatureMin,
-            String weather) {
+            String[] weather) {
         this.pressure = pressure;
         this.sunshine = sunshine;
         this.temperatureMax = temperatureMax;
@@ -32,7 +32,7 @@ public class WeekSummaryResponse {
         return temperatureMin;
     }
 
-    public String getWeather() {
+    public String[] getWeather() {
         return weather;
     }
 }

@@ -66,13 +66,13 @@ public class ForecastService {
         pressure /= days;
         sunshine /= days;
 
-        String weather = getWeatherDescription(weatherCodes);
+        String[] weather = getWeatherDescription(weatherCodes);
 
         return new WeekSummaryResponse(pressure, sunshine, temperatureMax, temperatureMin,
                 weather);
     }
 
-    private String getWeatherDescription(int[] weatherCodes) {
+    private String[] getWeatherDescription(int[] weatherCodes) {
         Map<String, Integer> weatherCodeMap = new HashMap<>();
         for (int code : weatherCodes) {
             String description = WeatherCodeMapper.getNearestSimplified(code);
@@ -105,7 +105,7 @@ public class ForecastService {
         if (secondMostFrequent == null)
             secondMostFrequent = "";
 
-        return mostFrequent + ", " + secondMostFrequent;
+        return new String[] { mostFrequent, secondMostFrequent };
     }
 
 }
