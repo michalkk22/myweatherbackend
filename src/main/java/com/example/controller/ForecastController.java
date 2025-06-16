@@ -6,12 +6,17 @@ import com.example.dto.DailyForecastResponse;
 import com.example.dto.WeekSummaryResponse;
 import com.example.service.ForecastService;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+
 import java.util.List;
 
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+@Validated
 @RestController
 @RequestMapping("/week")
 public class ForecastController {
@@ -23,16 +28,16 @@ public class ForecastController {
 
     @GetMapping
     public List<DailyForecastResponse> getWeekForecast(
-        @RequestParam double latitude,
-        @RequestParam double longitude
+            @RequestParam @Min(-90) @Max(90) double latitude,
+            @RequestParam @Min(-180) @Max(180) double longitude
     ) {
         return weekForecastService.getWeekForecast(latitude, longitude);
     }
 
     @GetMapping("/summary")
     public WeekSummaryResponse getWeekSummary(
-        @RequestParam double latitude,
-        @RequestParam double longitude
+            @RequestParam @Min(-90) @Max(90) double latitude,
+            @RequestParam @Min(-180) @Max(180) double longitude
     ) {
         return weekForecastService.getWeekSummary(latitude, longitude);
     }
