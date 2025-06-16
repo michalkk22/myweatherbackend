@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.example.client.ForecastClient;
 import com.example.dto.DailyForecastResponse;
 import com.example.dto.WeekSummaryResponse;
+import com.example.exception.ForecastServiceException;
 import com.example.model.ForecastApiModel;
 import com.example.utils.WeatherCodeMapper;
 
@@ -22,7 +23,13 @@ public class ForecastService {
     }
 
     public List<DailyForecastResponse> getWeekForecast(double latitude, double longitude) {
-        ForecastApiModel.Daily apiModel = forecastClient.getWeekForecast(latitude, longitude).getDaily();
+        ForecastApiModel.Daily apiModel;
+
+        try {
+            apiModel = forecastClient.getWeekForecast(latitude, longitude).getDaily();
+        } catch (RuntimeException e) {
+            throw new ForecastServiceException("Failed to fetch forecast data", e);
+        }
 
         List<DailyForecastResponse> response = new ArrayList<>();
 
@@ -46,7 +53,13 @@ public class ForecastService {
     }
 
     public WeekSummaryResponse getWeekSummary(double latitude, double longitude) {
-        ForecastApiModel.Daily apiModel = forecastClient.getWeekForecast(latitude, longitude).getDaily();
+        ForecastApiModel.Daily apiModel;
+
+        try {
+            apiModel = forecastClient.getWeekForecast(latitude, longitude).getDaily();
+        } catch (RuntimeException e) {
+            throw new ForecastServiceException("Failed to fetch forecast data", e);
+        }
 
         double pressure = 0.0;
         double sunshine = 0.0;

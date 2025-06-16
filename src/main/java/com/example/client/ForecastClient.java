@@ -6,6 +6,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 import com.example.config.WeatherApiProperties;
 import com.example.model.ForecastApiModel;
 
+import reactor.core.publisher.Mono;
+
 @Component
 public class ForecastClient {
     private final WebClient webClient;
@@ -26,6 +28,11 @@ public class ForecastClient {
                         .queryParam("timezone", "auto")
                         .build())
                 .retrieve()
+                .onStatus(
+                        status -> status.is4xxClientError() || status.is5xxServerError(),
+                        clientResponse -> clientResponse.bodyToMono(String.class).flatMap(errorBody -> {
+                            return Mono.error(new RuntimeException("API error: " + errorBody));
+                        }))
                 .bodyToMono(ForecastApiModel.class)
                 .block();
     }
