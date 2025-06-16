@@ -1,13 +1,13 @@
 # build
-FROM maven:3.9.7-eclipse-temurin-17-alpine as build
-RUN apk update && apk upgrade
+FROM maven:3.9.6-eclipse-temurin-17-alpine AS build
+WORKDIR /app
 COPY . .
+RUN chmod +x ./mvnw
 RUN ./mvnw clean package -DskipTests
 
 # run
 FROM eclipse-temurin:17-jdk-alpine
-RUN apk update && apk upgrade
 WORKDIR /app
-COPY --from=build target/*.jar app.jar
+COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
